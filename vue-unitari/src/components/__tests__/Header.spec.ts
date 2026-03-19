@@ -1,35 +1,34 @@
-import { describe, vi, it, test, expect } from "vitest"
-import { mount } from "@vue/test-utils"
-import router from "@/router"
-import TheHeader from "@/components/Header.vue"
+import { describe, vi, it, test, expect } from "vitest";
+import { mount } from "@vue/test-utils";
+import router from "@/router";
+import TheHeader from "@/components/Header.vue";
 
 function mountTheHeader() {
   const wrapper = mount(TheHeader, {
     global: {
-      plugins: [router]
-    }
-  })
+      plugins: [router],
+    },
+  });
 
-  return wrapper
+  return wrapper;
 }
 
-describe('The Router', () => {
-  it('mounts properly', () => {
-    expect(mountTheHeader().text()).toContain('About')
-  })
+describe("The Router", () => {
+  it("mounts properly", () => {
+    expect(mountTheHeader().text()).toContain("About");
+  });
 
-  test('click the links', async () => {
-    const push = vi.spyOn(router, 'push')
+  test("click the links", async () => {
+    const push = vi.spyOn(router, "push");
 
-    await mountTheHeader().find('a[id=link]').trigger('click')
+    await mountTheHeader().find("a[id=link]").trigger("click");
 
-    expect(push).toHaveBeenCalledOnce()
-    expect(push).toHaveBeenCalledWith('/')
+    expect(push).toHaveBeenCalledOnce();
+    expect(push).toHaveBeenCalledWith("/");
 
-    await mountTheHeader().find('a[type=button]').trigger('click')
+    await mountTheHeader().find("a[type=button]").trigger("click");
 
-    expect(push).toHaveBeenCalledTimes(2)
-    expect(push).toHaveBeenCalledWith('/about')
-  })
-})
-
+    expect(push).toHaveBeenCalledTimes(2);
+    expect(push).toHaveBeenCalledWith("/about");
+  });
+});
